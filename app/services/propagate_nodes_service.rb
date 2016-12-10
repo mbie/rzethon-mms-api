@@ -21,7 +21,7 @@ class PropagateNodesService
     Node.where.not(id: current_node.id).pluck(:host)  
   end
 
-  def propagate_nodes_to_host(host)
+  def propagate_nodes_to(host)
     NodeService.new(host).propagate(nodes_params)
   end
 

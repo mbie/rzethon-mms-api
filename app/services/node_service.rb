@@ -11,6 +11,11 @@ class NodeService
     end
   end
 
+  def submit(node)
+    client.post("/submissions") do |request|
+      request.body = { node: node }
+    end
+  end
   private
 
   def client

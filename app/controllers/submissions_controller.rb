@@ -2,7 +2,9 @@ class SubmissionsController < ApplicationController
   def create
     node = Node.where(name: node_params[:name]).first_or_initialize
     node.assign_attributes(node_params)
+
     if node.save
+      PropagateNodesService.call(current_node)
       render json: { message: node }
     else
       render json: { error: node.errors.full_messages }, status: :unprocessable_entity
