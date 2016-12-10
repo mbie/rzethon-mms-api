@@ -8,6 +8,10 @@
 #  updated_at :datetime         not null
 #  uuid       :uuid             not null
 #
+# Indexes
+#
+#  messages_uuid_key  (uuid) UNIQUE
+#
 
 class Message < ApplicationRecord
   validates :content, presence: true
