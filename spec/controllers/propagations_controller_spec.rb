@@ -15,7 +15,7 @@ RSpec.describe PropagationsController, :type => :controller do
     let(:do_create) { -> { post :create, params: { nodes: [node_params] } } }
 
     it "calls UpdateHostsService" do
-      expect(InvalidateNodesService).to receive(:call).with(kind_of(Array))
+      expect(InvalidateNodesService).to receive(:call).with(kind_of(Array), anything())
       do_create.call
     end
   end
