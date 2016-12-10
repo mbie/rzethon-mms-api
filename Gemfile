@@ -25,7 +25,7 @@ gem 'sinatra', require: false # for sidekiq
 gem 'annotate'
 
 group :development, :test do
-  gem 'pry-rails', require: false
+  gem 'pry-rails'
 end
 
 group :development do
