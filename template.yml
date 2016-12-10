@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: mms-api
+      POSTGRES_DB: mms-api_production
+
+  node:
+    build: .
+    command: bash -c "rm -rf tmp/pids/$$PIDFILE && sleep $${TIMEOUT:-12} && bundle exec rake db:migrate && bundle exec rails s -b '0.0.0.0' -P tmp/pids/$$PIDFILE"
+    environment:
+      RAILS_ENV: production
+    volumes:
+      - .:/myapp
+    env_file:
+      - 'sidekiq.env'
+
+  redis:
+    image: 'redis:3.2-alpine'
+    command: redis-server --requirepass pass
+
+  sidekiq:
+    build: .
+    command: bash -c "sleep $${TIMEOUT:-8} && sidekiq -P tmp/pids/sidekiq$$PIDFILE"
+    volumes:
+      - .:/myapp
+    env_file:
+      - 'sidekiq.env'
