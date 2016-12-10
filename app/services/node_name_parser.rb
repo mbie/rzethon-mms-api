@@ -18,7 +18,7 @@ class NodeNameParser
   end
 
   def attributes
-    { raw_name: raw_name, node_numeber: node_numeber, nodes_on_orbit_count: nodes_on_orbit_count }
+    ParserResult.new(raw_name, node_number, nodes_on_orbit_count)
   end
 
   private 
@@ -26,4 +26,6 @@ class NodeNameParser
   def numbers_scan
     name.scan(/\d+/)
   end
+
+  ParserResult = Struct.new(:raw_name, :node_number, :nodes_on_orbit_count)
 end
