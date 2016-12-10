@@ -23,6 +23,7 @@ gem 'redis', '~> 3.0'
 gem 'sidekiq', '~> 4.2.7'
 gem 'sinatra', require: false # for sidekiq
 gem 'annotate'
+gem 'faraday'
 
 group :development, :test do
   gem 'pry-rails'
