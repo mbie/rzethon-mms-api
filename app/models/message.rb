@@ -6,6 +6,7 @@
 #  content    :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  uuid       :uuid             not null
 #
 
 class Message < ApplicationRecord
