@@ -22,7 +22,7 @@ class PropagateNodesService
   end
 
   def propagate_nodes_to_host(host)
-    # Call node service here
+    NodeService.new(host).propagate(nodes_params)
   end
 
   def nodes_params
