@@ -83,3 +83,5 @@ production:
   database: mms-api_production
   username: mms-api
   password: <%= ENV['MMS-API_DATABASE_PASSWORD'] %>
+  host: db
+  port: 5432
