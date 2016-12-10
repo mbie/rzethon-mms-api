@@ -25,12 +25,13 @@ ActiveRecord::Schema.define(version: 20161210151907) do
   end
 
   create_table "nodes", force: :cascade do |t|
-    t.string   "name",                                   null: false
-    t.string   "host",                                   null: false
-    t.decimal  "location_x",   precision: 16, scale: 12, null: false
-    t.decimal  "location_y",   precision: 16, scale: 12, null: false
-    t.decimal  "location_z",   precision: 16, scale: 12, null: false
-    t.datetime "refreshed_at",                           null: false
+    t.string   "name",                                 null: false
+    t.string   "host",                                 null: false
+    t.decimal  "location_x", precision: 16, scale: 12, null: false
+    t.decimal  "location_y", precision: 16, scale: 12, null: false
+    t.decimal  "location_z", precision: 16, scale: 12, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
 end
