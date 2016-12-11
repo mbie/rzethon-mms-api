@@ -1,10 +1,5 @@
 version: '2'
 services:
-  #data:
-    #image: busybox
-    #volumes:
-      #- .:/myapp
-
   db1:
     extends:
       file: template.yml

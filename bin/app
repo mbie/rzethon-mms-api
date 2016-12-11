@@ -1,0 +1,27 @@
+#!/bin/bash
+
+case $1 in
+start)
+  case $2 in
+  [1-9]*)
+    for i in $(seq 1 $2); do i=$i docker-compose -p mmsapi$i -f docker-compose.parametrized.yml up -d; done
+    ;;
+  *)
+    docker-compose up
+    ;;
+  esac
+  ;;
+stop)
+  case $2 in
+  [1-9]*)
+    for i in $(seq 1 $2); do docker-compose -p mmsapi$i down --remove-orphans; done
+    ;;
+  *)
+    docker-compose down
+    ;;
+  esac
+  ;;
+*)
+  echo 'provide either start or stop option'
+  ;;
+esac
