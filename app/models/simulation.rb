@@ -9,13 +9,17 @@ class Simulation
   def as_json
     {
       id: message.uuid,
-      path: shortest_path.map,
+      path: shortest_path.map { |node| node.as_json },
       lastReport: {
         name: source.name,
         time: (message.created_at.to_f * 1000).to_i
       },
       speedFactor: 1.0,
     }
+  end
+
+  def path
+    shortest_path
   end
 
   private
@@ -39,8 +43,8 @@ class Simulation
     # end
     # shortest_path
     middle_1 = Node.where(name: "MARS#1-2").take
-    middle_2 = Node.where(name: "VENUS#1-2").take
-    [source, middle_1, middle_2, destination].map { |node| node.as_json }
+    middle_2 = Node.where(name: "MARS#2-2").take
+    [source, middle_1, middle_2, destination]
   end
 
   def destination

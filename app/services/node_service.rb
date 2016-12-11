@@ -16,6 +16,13 @@ class NodeService
       request.body = { node: node }
     end
   end
+
+  def send_message(message)
+    client.post("/sender") do |request|
+      request.body = { message: messsage }
+    end
+  end
+  
   private
 
   def client
