@@ -8,9 +8,7 @@ services:
 
   node:
     build: .
-    command: bash -c "rm -rf tmp/pids/$$PIDFILE && sleep $${TIMEOUT:-12} && bundle exec rake db:migrate && bundle exec rails s -b '0.0.0.0' -P tmp/pids/$$PIDFILE"
-    environment:
-      RAILS_ENV: production
+    command: bash -c "rm -rf tmp/pids/$$PIDFILE && sleep $${TIMEOUT:-6} && bundle exec rake db:migrate && bundle exec rails s -b '0.0.0.0' -P tmp/pids/$$PIDFILE"
     volumes:
       - .:/myapp
     env_file:
@@ -22,7 +20,7 @@ services:
 
   sidekiq:
     build: .
-    command: bash -c "sleep $${TIMEOUT:-8} && sidekiq -P tmp/pids/sidekiq$$PIDFILE"
+    command: bash -c "sleep $${TIMEOUT:-8} && sidekiq -e production -P tmp/pids/sidekiq$$PIDFILE"
     volumes:
       - .:/myapp
     env_file:

@@ -10,14 +10,16 @@ class InvalidateNodesService
 
   def call
     changed = false
-    
-    nodes.each do |node_params|
-      node = Node.where(name: node_params[:name]).first_or_initialize
 
-      node.assign_attributes(node_params)
-      if node.changed?
-        changed = true if !changed 
-        node.save! 
+    Node.transaction do
+      nodes.each do |node_params|
+        node = Node.where(name: node_params[:name]).lock(true).first_or_initialize
+
+        node.assign_attributes(node_params.to_hash)
+        if node.changed?
+          changed = true if !changed
+          node.save!
+        end
       end
     end
 

@@ -12,4 +12,8 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:content, :destination)
   end
+
+  def index
+    render json: { messages: Message.all }
+  end
 end
