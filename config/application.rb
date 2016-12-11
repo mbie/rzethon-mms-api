@@ -29,5 +29,6 @@ module MmsApi
 
     config.active_job.queue_adapter = :sidekiq
     config.autoload_paths += %W(#{config.root}/app/workers)
+    config.logger = Logger.new(STDOUT)
   end
 end
