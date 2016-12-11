@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   def create
-    message = Message.new(message_params)
+    message = Message.new(message_params.merge(source: current_node.name))
+    
     if message.save
       render json: { message: message.reload }
     else
@@ -9,6 +10,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :destination)
   end
 end
