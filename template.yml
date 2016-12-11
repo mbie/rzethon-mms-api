@@ -9,8 +9,6 @@ services:
   node:
     build: .
     command: bash -c "rm -rf tmp/pids/$$PIDFILE && sleep $${TIMEOUT:-12} && bundle exec rake db:migrate && bundle exec rails s -b '0.0.0.0' -P tmp/pids/$$PIDFILE"
-    environment:
-      RAILS_ENV: production
     volumes:
       - .:/myapp
     env_file:
