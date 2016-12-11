@@ -2,11 +2,13 @@
 #
 # Table name: messages
 #
-#  id         :integer          not null, primary key
-#  content    :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  uuid       :uuid             not null
+#  id          :integer          not null, primary key
+#  content     :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  uuid        :uuid             not null
+#  source      :string           not null
+#  destination :string           not null
 #
 # Indexes
 #
@@ -14,5 +16,6 @@
 #
 
 class Message < ApplicationRecord
-  validates :content, presence: true
+  validates :content, :source, :destination, presence: true
+  scope :current, -> { all }
 end
