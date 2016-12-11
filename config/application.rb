@@ -28,6 +28,6 @@ module MmsApi
     config.api_only = true
 
     config.active_job.queue_adapter = :sidekiq
-    config.autoload_paths += %W(#{config.root}/app/workers)
+    config.autoload_paths += %W(#{config.root}/app/workers #{config.root}/lib)
   end
 end

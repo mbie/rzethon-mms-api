@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: nodes
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  host       :string           not null
+#  location_x :decimal(16, 12)  not null
+#  location_y :decimal(16, 12)  not null
+#  location_z :decimal(16, 12)  not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 FactoryGirl.define do
   factory :node do
     sequence(:name) { |n| "NODE_NAME_##{n}" }
