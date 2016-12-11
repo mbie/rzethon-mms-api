@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
     message = Message.new(message_params.merge(source: current_node.name))
     
     if message.save
-      render json: { message: message.reload }
+      MessageSenderService.call(message.reload, current_node)
+      render json: { message: message }
     else
       render json: { error: message.errors.full_messages }, status: :unprocessable_entity
     end
