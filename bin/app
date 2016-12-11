@@ -4,7 +4,7 @@ case $1 in
 start)
   case $2 in
   [1-9]*)
-    for i in $(seq 1 $2); do i=$i docker-compose -p mmsapi$i -f docker-compose.parametrized.yml up -d; done
+    for j in $(seq 1 $2); do i=$j docker-compose -p mmsapi$j -f docker-compose.parametrized.yml up -d; done
     ;;
   *)
     docker-compose up
@@ -14,10 +14,20 @@ start)
 stop)
   case $2 in
   [1-9]*)
-    for i in $(seq 1 $2); do docker-compose -p mmsapi$i down --remove-orphans; done
+    for j in $(seq 1 $2); do i=$j docker-compose -p mmsapi$j -f docker-compose.parametrized.yml down --remove-orphans; done
     ;;
   *)
     docker-compose down
+    ;;
+  esac
+  ;;
+build)
+  case $2 in
+  [1-9]*)
+    for j in $(seq 1 $2); do i=$j docker-compose -p mmsapi$j -f docker-compose.parametrized.yml build; done
+    ;;
+  *)
+    docker-compose build
     ;;
   esac
   ;;
