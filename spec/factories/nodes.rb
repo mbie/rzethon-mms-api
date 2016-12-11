@@ -14,7 +14,7 @@ FactoryGirl.define do
       location_z 0
     end
 
-   trait :earth1_2 do
+   trait :earth2_2 do
       name "EARTH#2-2"
       host "http//earth22.com"
       location_x 0.16791087689025785
