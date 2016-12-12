@@ -19,7 +19,7 @@ class Node < ApplicationRecord
     Location.new(location_x, location_y, location_z)
   end
 
-  def as_json(options={})
+  def as_json2(options={})
     {
       name: name,
       host: host,
