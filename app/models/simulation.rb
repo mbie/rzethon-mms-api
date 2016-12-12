@@ -38,9 +38,9 @@ class Simulation
     #   end
     # end
     # shortest_path
-    middle_1 = Node.where(name: "MARS#1-2").take
-    middle_2 = Node.where(name: "VENUS#1-2").take
-    [source, middle_1, middle_2, destination].map { |node| node.as_json }
+    middle_1 = Node.where(name: "MARS#1.3").take
+    #middle_2 = Node.where(name: "VENUS#1.3").take
+    [source, middle_1, destination].map { |node| node.as_json2 }
   end
 
   def destination
