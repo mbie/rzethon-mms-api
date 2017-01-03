@@ -11,13 +11,18 @@ RSpec.describe SubmissionsController, :type => :controller do
         location_z: 123.2,
       }
     end
+    let(:current_node) { create :node, name: "CURRENT_NODE#123", host: "123" }
+
+    before do
+      ENV["CURRENT_NODE_NAME"] = current_node.name
+    end
 
     let(:do_create) { -> { post :create, params: { node: node_params } } }
 
     it "saves node" do
       expect { do_create.call }.to change { Node.count }.by(1)
       expect(response).to have_http_status(200)
-      expect(Node.first.name).to eq("MARS-123")
+      expect(Node.last.name).to eq("MARS-123")
     end
 
     it "renders returns success response" do
@@ -35,6 +40,11 @@ RSpec.describe SubmissionsController, :type => :controller do
       node_params.delete(:host)
       expect { do_create.call }.not_to change { Node.count }
       expect(response).to have_http_status(422)
+    end
+
+    it "propagate message to current node" do
+      expect(PropagationWorker).to receive(:perform_async).with(current_node.id)
+      do_create.call
     end
   end
 end
