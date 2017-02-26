@@ -1,0 +1,7 @@
+version: '2'
+services:
+  node:
+    build: .
+    command: config/docker/run.sh
+    volumes:
+      - .:/myapp
