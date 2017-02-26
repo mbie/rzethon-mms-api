@@ -12,18 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20161211075744) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
-
   create_table "messages", force: :cascade do |t|
-    t.string   "content",                                           null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.uuid     "uuid",        default: -> { "uuid_generate_v4()" }, null: false
-    t.string   "source",                                            null: false
-    t.string   "destination",                                       null: false
-    t.index ["uuid"], name: "messages_uuid_key", unique: true, using: :btree
+    t.uuid     "uuid",        null: false
+    t.string   "content",     null: false
+    t.string   "source",      null: false
+    t.string   "destination", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "nodes", force: :cascade do |t|

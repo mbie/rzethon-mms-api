@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+db/mms-api*
 
 # Ignore Byebug command history file.
 .byebug_history
