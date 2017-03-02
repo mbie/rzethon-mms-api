@@ -6,7 +6,7 @@ class NodesController < ApplicationController
     'MARS#1.3', 'MARS#2.3', 'MARS#3.3'
   ]
 
-  @@name_index = {}
+  #@@name_index = {}
   @@mutex = Mutex.new
 
   def index
@@ -15,18 +15,17 @@ class NodesController < ApplicationController
   end
 
   def names
-    render json: { names: @@name_index }
+    render json: { names: NAME_INDEX }
   end
 
   def register_name
     address = params['address']
     @@mutex.synchronize do
-      if not @@name_index.include? address
-        @@name_index[address] = @@names.select{ |n| not @@name_index.value? n }.first
+      if not NAME_INDEX.include? address
+        NAME_INDEX[address] = @@names.select{ |n| not NAME_INDEX.value? n }.first
       end
 
-      puts address, @@name_index[address]
-      render json: { name: @@name_index[address] }
+      render json: { name: NAME_INDEX[address] }
     end
   end
 end

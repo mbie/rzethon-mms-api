@@ -5,6 +5,8 @@ class NodeSubmissionWorker
 
   def perform(base_host, current_host, name)
     @@semafor.synchronize do
+      # when DEMO variable set, try to initialize local host ip as current nodes address
+      # also get name from the first node to allow dynamic scaling, without bulky config
       if ENV['DEMO']
         current_ip = `ip addr | awk -F'/|\s+' '/global/ {print $3}'`.strip
         current_host = "http://#{current_ip}:3000"

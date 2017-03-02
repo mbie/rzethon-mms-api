@@ -18,7 +18,7 @@ class PropagateNodesService
   attr_reader :current_node
   
   def hosts
-    Node.where.not(id: current_node.id).pluck(:host)  
+    Node.where.not(id: @current_node.id).pluck(:host)  
   end
 
   def propagate_nodes_to(host)
