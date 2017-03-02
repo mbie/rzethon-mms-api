@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   get '/nodes/names', to: 'nodes#names'
   put '/nodes/register_name', to: 'nodes#register_name'
+  get '/nodes/me', to: 'nodes#me'
 
   resources :messages, only: [:create, :index]
-  resources :nodes, only: [:index]
+  resources :nodes, only: [:index, :show]
   resources :submissions, only: [:create]
   resources :propagations, only: [:create]
   resources :simulations, only: [:index]

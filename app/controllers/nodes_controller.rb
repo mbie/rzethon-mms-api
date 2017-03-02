@@ -14,6 +14,14 @@ class NodesController < ApplicationController
     render json: { nodes: nodes }
   end
 
+  def show
+    render json: { node: Node.find(params[:id]) }
+  end
+
+  def me
+    render json: { current_node: Node.where(name: NODE_NAME) }
+  end
+
   def names
     render json: { names: NAME_INDEX }
   end
