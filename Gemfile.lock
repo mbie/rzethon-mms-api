@@ -142,6 +142,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    shortest-path (0.0.4)
     sidekiq (4.2.7)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -188,6 +189,7 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   redis (~> 3.0)
   rspec-rails
+  shortest-path
   sidekiq (~> 4.2.7)
   sinatra
   spring
@@ -197,4 +199,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.13.6
+   1.14.5

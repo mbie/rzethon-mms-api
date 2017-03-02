@@ -25,6 +25,7 @@ class InvalidateNodesService
 
     if changed
       PropagateNodesService.call(current_node)
+      PathService.recalculate
     end
   end
 

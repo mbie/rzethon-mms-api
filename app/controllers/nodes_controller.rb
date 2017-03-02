@@ -19,7 +19,7 @@ class NodesController < ApplicationController
   end
 
   def me
-    render json: { current_node: Node.where(name: NODE_NAME) }
+    render json: { current_node: Node.where(name: Redis.current.get('node_name')) }
   end
 
   def names

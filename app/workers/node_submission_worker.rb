@@ -10,10 +10,12 @@ class NodeSubmissionWorker
       if ENV['DEMO']
         current_ip = `ip addr | awk -F'/|\s+' '/global/ {print $3}'`.strip
         current_host = "http://#{current_ip}:3000"
+        Redis.current.set('current_host', current_host)
 
         name = JSON.parse(Faraday.put(
           base_host+'/nodes/register_name', {'address'=>current_host}
         ).body)['name']
+        Redis.current.set('node_name', name)
       end
 
       return if not ActiveRecord::Base.connection.data_source_exists? 'nodes'
