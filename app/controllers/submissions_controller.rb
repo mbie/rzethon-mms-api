@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
     node.assign_attributes(node_params)
 
     if node.save
-      PropagationWorker.perform_async(current_node.id)
+      PropagationWorker.perform_async(node.id)
       render json: { message: node }
     else
       render json: { error: node.errors.full_messages }, status: :unprocessable_entity

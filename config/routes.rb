@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
+  get '/nodes/names', to: 'nodes#names'
+  put '/nodes/register_name', to: 'nodes#register_name'
+
   resources :messages, only: [:create, :index]
   resources :nodes, only: [:index]
   resources :submissions, only: [:create]

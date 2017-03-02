@@ -5,3 +5,16 @@ services:
     command: config/docker/run.sh
     volumes:
       - .:/myapp
+    ports:
+      - '3000:3000'
+    environment:
+      DEMO: 'true'
+      BASE_NODE_HOST: 'http://node:3000'
+  slave_node:
+    build: .
+    command: bash -c 'sleep 6 && config/docker/run.sh'
+    volumes:
+      - .:/myapp
+    environment:
+      DEMO: 'true'
+      BASE_NODE_HOST: 'http://node:3000'
