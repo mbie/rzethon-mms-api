@@ -1,6 +1,6 @@
 class PropagationsController < ApplicationController
   def create
-    InvalidateNodesService.call(params[:nodes], current_node)
+    InvalidateNodesService.call(params[:nodes])
     head :ok
   end
 end

@@ -1,7 +1,6 @@
 class InvalidateNodesService
-  def initialize(nodes, current_node)
+  def initialize(nodes)
     @nodes = nodes
-    @current_node = current_node
   end
 
   def self.call(*args)
@@ -15,7 +14,7 @@ class InvalidateNodesService
       nodes.each do |node_params|
         node = Node.where(name: node_params[:name]).lock(true).first_or_initialize
 
-        node.assign_attributes(node_params.to_hash)
+        node.assign_attributes(node_params.permit(:name, :host, :location_x, :location_y, :location_z))
         if node.changed?
           changed = true if !changed
           node.save!
@@ -24,12 +23,12 @@ class InvalidateNodesService
     end
 
     if changed
-      PropagateNodesService.call(current_node)
-      PathService.recalculate
+      PropagationWorker.perform_async
+      PathService.new.recalculate
     end
   end
 
   private
 
-  attr_reader :nodes, :current_node
+  attr_reader :nodes
 end
