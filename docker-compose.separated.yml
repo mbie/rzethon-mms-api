@@ -22,6 +22,9 @@ services:
     environment:
       PIDFILE: 'pidf1.pid'
       TIMEOUT: 8
+      BASE_NODE_HOST: 'http://node1:3000'
+      CURRENT_NODE_HOST: 'http://node1:3000'
+      CURRENT_NODE_NAME: 'EARTH#1.3'
 
   sidekiq1:
     extends:
@@ -54,6 +57,9 @@ services:
       - 'redis2:redis'
     environment:
       PIDFILE: 'pidf2.pid'
+      BASE_NODE_HOST: 'http://node1:3000'
+      CURRENT_NODE_HOST: 'http://node2:3000'
+      CURRENT_NODE_NAME: 'MARS#1.3'
 
   sidekiq2:
     extends:
@@ -65,98 +71,98 @@ services:
     environment:
       PIDFILE: 'pidf2.pid'
 
-  db3:
-    extends:
-      file: template.yml
-      service: db
+  #db3:
+    #extends:
+      #file: template.yml
+      #service: db
 
-  redis3:
-    extends:
-      file: template.yml
-      service: redis
+  #redis3:
+    #extends:
+      #file: template.yml
+      #service: redis
 
-  node3:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3002:3000'
-    links:
-      - 'db3:db'
-      - 'redis3:redis'
-    environment:
-      PIDFILE: 'pidf3.pid'
+  #node3:
+    #extends:
+      #file: template.yml
+      #service: node
+    #ports:
+      #- '3002:3000'
+    #links:
+      #- 'db3:db'
+      #- 'redis3:redis'
+    #environment:
+      #PIDFILE: 'pidf3.pid'
 
-  sidekiq3:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db3:db'
-      - 'redis3:redis'
-    environment:
-      PIDFILE: 'pidf3.pid'
+  #sidekiq3:
+    #extends:
+      #file: template.yml
+      #service: sidekiq
+    #links:
+      #- 'db3:db'
+      #- 'redis3:redis'
+    #environment:
+      #PIDFILE: 'pidf3.pid'
 
-  db4:
-    extends:
-      file: template.yml
-      service: db
+  #db4:
+    #extends:
+      #file: template.yml
+      #service: db
 
-  redis4:
-    extends:
-      file: template.yml
-      service: redis
+  #redis4:
+    #extends:
+      #file: template.yml
+      #service: redis
 
-  node4:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3003:3000'
-    links:
-      - 'db4:db'
-      - 'redis4:redis'
-    environment:
-      PIDFILE: 'pidf4.pid'
+  #node4:
+    #extends:
+      #file: template.yml
+      #service: node
+    #ports:
+      #- '3003:3000'
+    #links:
+      #- 'db4:db'
+      #- 'redis4:redis'
+    #environment:
+      #PIDFILE: 'pidf4.pid'
 
-  sidekiq4:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db4:db'
-      - 'redis4:redis'
-    environment:
-      PIDFILE: 'pidf4.pid'
+  #sidekiq4:
+    #extends:
+      #file: template.yml
+      #service: sidekiq
+    #links:
+      #- 'db4:db'
+      #- 'redis4:redis'
+    #environment:
+      #PIDFILE: 'pidf4.pid'
 
-  db5:
-    extends:
-      file: template.yml
-      service: db
+  #db5:
+    #extends:
+      #file: template.yml
+      #service: db
 
-  redis5:
-    extends:
-      file: template.yml
-      service: redis
+  #redis5:
+    #extends:
+      #file: template.yml
+      #service: redis
 
-  node5:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3004:3000'
-    links:
-      - 'db5:db'
-      - 'redis5:redis'
-    environment:
-      PIDFILE: 'pidf5.pid'
+  #node5:
+    #extends:
+      #file: template.yml
+      #service: node
+    #ports:
+      #- '3004:3000'
+    #links:
+      #- 'db5:db'
+      #- 'redis5:redis'
+    #environment:
+      #PIDFILE: 'pidf5.pid'
 
-  sidekiq5:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db5:db'
-      - 'redis5:redis'
-    environment:
-      PIDFILE: 'pidf5.pid'
+  #sidekiq5:
+    #extends:
+      #file: template.yml
+      #service: sidekiq
+    #links:
+      #- 'db5:db'
+      #- 'redis5:redis'
+    #environment:
+      #PIDFILE: 'pidf5.pid'

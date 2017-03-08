@@ -12,6 +12,9 @@ require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
+# used for connection adapter comparison
+require 'active_record/connection_adapters/sqlite3_adapter'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

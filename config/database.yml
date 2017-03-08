@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: mms-api_production
   username: mms-api
   password: <%= ENV['MMS-API_DATABASE_PASSWORD'] %>
