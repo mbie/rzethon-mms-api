@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20161211075744) do
 
-  create_table "messages", force: :cascade do |t|
-    t.uuid     "uuid",        null: false
+  create_table "messages", id: :uuid, force: :cascade do |t|
     t.string   "content",     null: false
     t.string   "source",      null: false
     t.string   "destination", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["id"], name: "sqlite_autoindex_messages_1", unique: true
   end
 
   create_table "nodes", force: :cascade do |t|

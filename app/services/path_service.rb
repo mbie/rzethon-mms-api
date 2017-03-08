@@ -5,6 +5,9 @@ class PathService
 
   def initialize()
     @paths = JSON.parse(Redis.current.get('paths') || "{}")
+    if not @paths
+      recalculate
+    end
   end
 
   def build_graph

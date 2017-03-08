@@ -2,13 +2,16 @@
 #
 # Table name: messages
 #
-#  id          :integer          not null, primary key
-#  uuid        :uuid(16)         not null
+#  id          :uuid(16)         not null, primary key
 #  content     :string           not null
 #  source      :string           not null
 #  destination :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  sqlite_autoindex_messages_1  (id) UNIQUE
 #
 
 class Message < ApplicationRecord
