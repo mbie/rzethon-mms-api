@@ -5,7 +5,7 @@ class PathService
 
   def initialize()
     @paths = JSON.parse(Redis.current.get('paths') || "{}")
-    if not @paths
+    if not @paths or @paths.empty?
       recalculate
     end
   end

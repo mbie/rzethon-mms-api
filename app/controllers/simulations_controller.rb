@@ -8,7 +8,6 @@ class SimulationsController < ApplicationController
   end
 
   def paths
-    PathService.new.recalculate
     render json: { paths: PathService.new.paths }
   end
 end

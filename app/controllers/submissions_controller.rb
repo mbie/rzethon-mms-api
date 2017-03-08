@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
 
     if node.save
       PropagationWorker.perform_async
+      PathService.new.recalculate
       render json: { message: node }
     else
       render json: { error: node.errors.full_messages }, status: :unprocessable_entity

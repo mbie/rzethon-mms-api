@@ -25,7 +25,7 @@ class Simulation
   private
 
   def shortest_path
-    PathService.new.recalculate[message.destination].collect { |name| Node.where(name: name).take }
+    PathService.new.paths[message.destination].collect { |name| Node.where(name: name).take }
   end
 
   def destination
