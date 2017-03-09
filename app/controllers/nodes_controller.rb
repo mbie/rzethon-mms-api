@@ -23,7 +23,6 @@ class NodesController < ApplicationController
     'NEPTUNE#1.1'
   ]
 
-  #@@name_index = {}
   @@mutex = Mutex.new
 
   def index
@@ -36,7 +35,7 @@ class NodesController < ApplicationController
   end
 
   def me
-    render json: { current_node: Node.where(name: Redis.current.get('node_name')) }
+    render json: { current_node: Node.current }
   end
 
   def names
@@ -46,9 +45,7 @@ class NodesController < ApplicationController
   def register_name
     address = params['address']
     @@mutex.synchronize do
-      if not NAME_INDEX.include? address
-        NAME_INDEX[address] = @@names.select{ |n| not NAME_INDEX.value? n }.first
-      end
+      NAME_INDEX[address] ||= @@names.select{ |n| not NAME_INDEX.value? n }.first
 
       render json: { name: NAME_INDEX[address] }
     end

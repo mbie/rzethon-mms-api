@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211075744) do
+ActiveRecord::Schema.define(version: 20161210151907) do
 
   create_table "messages", id: :uuid, force: :cascade do |t|
     t.string   "content",     null: false

@@ -3,7 +3,7 @@ class MessageSenderService
 
   def initialize(message)
     @message = message
-    @current_node = Node.where(name: Redis.current.get('node_name')).take
+    @current_node = Node.current
   end
 
   def self.call(*args)

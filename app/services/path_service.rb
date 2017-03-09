@@ -5,18 +5,18 @@ class PathService
 
   def initialize()
     @paths = JSON.parse(Redis.current.get('paths') || "{}")
-    if not @paths or @paths.empty?
+    if @paths.blank?
       recalculate
     end
   end
 
   def build_graph
     graph = Shortest::Path::Graph.new.concat Node.all.collect { |n| n.name }
-    graph.each { |i|
-      graph.each { |j|
+    graph.each do |i|
+      graph.each do |j|
         graph.connect_mutually(i, j, 1)
-      }
-    }
+      end
+    end
     graph
   end
 

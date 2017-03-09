@@ -14,7 +14,7 @@ class InvalidateNodesService
       nodes.each do |node_params|
         node = Node.where(name: node_params[:name]).lock(true).first_or_initialize
 
-        node.assign_attributes(node_params.permit(:name, :host, :location_x, :location_y, :location_z))
+        node.assign_attributes(node_params)
         if node.changed?
           changed = true if !changed
           node.save!
