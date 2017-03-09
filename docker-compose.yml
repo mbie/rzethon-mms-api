@@ -1,162 +1,20 @@
 version: '2'
 services:
-  db1:
-    extends:
-      file: template.yml
-      service: db
-
-  redis1:
-    extends:
-      file: template.yml
-      service: redis
-
-  node1:
-    extends:
-      file: template.yml
-      service: node
+  node:
+    build: .
+    command: config/docker/run.sh
+    volumes:
+      - .:/myapp
     ports:
       - '3000:3000'
-    links:
-      - 'db1:db'
-      - 'redis1:redis'
     environment:
-      PIDFILE: 'pidf1.pid'
-      TIMEOUT: 8
-
-  sidekiq1:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db1:db'
-      - 'redis1:redis'
+      DEMO: 'true'
+      BASE_NODE_HOST: 'http://node:3000'
+  slave_node:
+    build: .
+    command: bash -c 'sleep 6 && config/docker/run.sh'
+    volumes:
+      - .:/myapp
     environment:
-      PIDFILE: 'pidf1.pid'
-
-  db2:
-    extends:
-      file: template.yml
-      service: db
-
-  redis2:
-    extends:
-      file: template.yml
-      service: redis
-
-  node2:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3001:3000'
-    links:
-      - 'db2:db'
-      - 'redis2:redis'
-    environment:
-      PIDFILE: 'pidf2.pid'
-
-  sidekiq2:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db2:db'
-      - 'redis2:redis'
-    environment:
-      PIDFILE: 'pidf2.pid'
-
-  db3:
-    extends:
-      file: template.yml
-      service: db
-
-  redis3:
-    extends:
-      file: template.yml
-      service: redis
-
-  node3:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3002:3000'
-    links:
-      - 'db3:db'
-      - 'redis3:redis'
-    environment:
-      PIDFILE: 'pidf3.pid'
-
-  sidekiq3:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db3:db'
-      - 'redis3:redis'
-    environment:
-      PIDFILE: 'pidf3.pid'
-
-  db4:
-    extends:
-      file: template.yml
-      service: db
-
-  redis4:
-    extends:
-      file: template.yml
-      service: redis
-
-  node4:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3003:3000'
-    links:
-      - 'db4:db'
-      - 'redis4:redis'
-    environment:
-      PIDFILE: 'pidf4.pid'
-
-  sidekiq4:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db4:db'
-      - 'redis4:redis'
-    environment:
-      PIDFILE: 'pidf4.pid'
-
-  db5:
-    extends:
-      file: template.yml
-      service: db
-
-  redis5:
-    extends:
-      file: template.yml
-      service: redis
-
-  node5:
-    extends:
-      file: template.yml
-      service: node
-    ports:
-      - '3004:3000'
-    links:
-      - 'db5:db'
-      - 'redis5:redis'
-    environment:
-      PIDFILE: 'pidf5.pid'
-
-  sidekiq5:
-    extends:
-      file: template.yml
-      service: sidekiq
-    links:
-      - 'db5:db'
-      - 'redis5:redis'
-    environment:
-      PIDFILE: 'pidf5.pid'
+      DEMO: 'true'
+      BASE_NODE_HOST: 'http://node:3000'

@@ -6,4 +6,8 @@ class SimulationsController < ApplicationController
 
     render json: { messages: messages }
   end
+
+  def paths
+    render json: { paths: PathService.new.paths }
+  end
 end

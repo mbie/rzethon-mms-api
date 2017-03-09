@@ -30,4 +30,8 @@ class Node < ApplicationRecord
       }
     }
   end
+
+  def self.current
+    self.where(name: Redis.current.get('node_name')).take
+  end
 end

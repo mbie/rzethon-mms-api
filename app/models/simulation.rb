@@ -8,8 +8,8 @@ class Simulation
 
   def as_json
     {
-      id: message.uuid,
-      path: shortest_path.map { |node| node.as_json },
+      id: message.id,
+      path: path.map { |node| node.as_json2 },
       lastReport: {
         name: source.name,
         time: (message.created_at.to_f * 1000).to_i
@@ -25,26 +25,7 @@ class Simulation
   private
 
   def shortest_path
-    # nodes = Node.all
-    # min_cost = 0.0
-    # shortest_path = []
-    
-    # nodes.to_a.permutation.to_a.each do |path|
-    #   next if path.first.name != source.name || path.last.name != destination.name
-      
-    #   path_cost = path.permutation(2).to_a.map do |first, second|
-    #     NodesDistanceCalculator.call(first, second)
-    #   end.reduce(:+)
-
-    #   if path_cost < min_cost && min_cost != 0.0
-    #     min_cost = path_cost 
-    #     shortest_path = path
-    #   end
-    # end
-    # shortest_path
-    middle_1 = Node.where(name: "MARS#1-2").take
-    middle_2 = Node.where(name: "MARS#2-2").take
-    [source, middle_1, middle_2, destination]
+    PathService.new.paths[message.destination].collect { |name| Node.where(name: name).take }
   end
 
   def destination
